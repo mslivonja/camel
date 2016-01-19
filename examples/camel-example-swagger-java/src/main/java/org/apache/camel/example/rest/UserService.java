@@ -16,6 +16,8 @@
  */
 package org.apache.camel.example.rest;
 
+import org.apache.log4j.Logger;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.Random;
@@ -25,6 +27,8 @@ import java.util.TreeMap;
  * A {@link org.apache.camel.example.rest.User} service which we rest enable the routes defined in the XML file.
  */
 public class UserService {
+
+    private static final Logger log = Logger.getLogger(UserService.class);
 
     // use a tree map so they become sorted
     private final Map<String, User> users = new TreeMap<String, User>();
@@ -44,6 +48,7 @@ public class UserService {
      * @return the user, or <tt>null</tt> if no user exists
      */
     public User getUser(String id) {
+        log.debug("GET User with ID['" + id + "']");
         if ("789".equals(id)) {
             // simulate some cpu processing time when returning the slow turtle
             int delay = 500 + ran.nextInt(1500);
@@ -62,6 +67,7 @@ public class UserService {
      * @return the list of all users
      */
     public Collection<User> listUsers() {
+        log.debug("GET All Users");
         return users.values();
     }
 
@@ -71,6 +77,7 @@ public class UserService {
      * @param user the user
      */
     public void updateUser(User user) {
+        log.debug("Create NEW User with ID['" + user.getId() + "']");
         users.put("" + user.getId(), user);
     }
 }
