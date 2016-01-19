@@ -24,6 +24,8 @@ public class User {
 
     private int id;
     private String name;
+    private String address;
+    private String city;
 
     public User() {
     }
@@ -31,6 +33,16 @@ public class User {
     public User(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public User(int id, String name, String address){
+        this(id,name);
+        this.address = address;
+    }
+
+    public User(int id, String name, String address, String city){
+        this(id, name, address);
+        this.city = city;
     }
 
     @ApiModelProperty(value = "The id of the user", required = true)
@@ -49,5 +61,23 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @ApiModelProperty(value = "User address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @ApiModelProperty(value = "User address city")
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

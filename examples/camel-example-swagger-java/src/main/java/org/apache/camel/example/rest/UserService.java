@@ -39,6 +39,7 @@ public class UserService {
         users.put("123", new User(123, "John Doe"));
         users.put("456", new User(456, "Donald Duck"));
         users.put("789", new User(789, "Slow Turtle"));
+        users.put("789", new User(9999, "Matija Slivonja", "Sokolgradska 25a", "Zagreb"));
     }
 
     /**
