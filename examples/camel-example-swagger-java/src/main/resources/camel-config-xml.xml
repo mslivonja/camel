@@ -41,7 +41,7 @@
 
     <!-- defines the rest services using the context-path /user -->
     <rest path="/user" consumes="application/json" produces="application/json">
-      <description>User rest service</description>
+      <description>User REST service</description>
 
       <!-- this is a rest GET to view an user by the given id -->
       <get uri="/{id}" outType="org.apache.camel.example.rest.User">
