@@ -160,7 +160,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>${target.main.class}</mainClass>
-					<includePluginDependencies>false</includePluginDependencies>
+					<includePluginDependencies>true</includePluginDependencies>
 				</configuration>
 			</plugin>
 		</plugins>
