@@ -32,5 +32,12 @@ If you hit an problems please let us know on the Camel Forums [http://camel.apac
 Please help us make Apache Camel better - we appreciate any feedback you may
 have.  Enjoy!
 
+### Troubleshooting
+
+1)  If javax.management.MBeanTrustPermission register exception arises
+    Change <JRE_HOME>/lib/security and add following line
+
+        permission javax.management.MBeanTrustPermission "register";
+
 
 The Camel riders!
