@@ -79,9 +79,15 @@
 
 	<profiles>
 		<profile>
-			<id>Example</id>
+			<id>ActiveMQ</id>
 			<properties>
 				<target.main.class>org.apache.camel.example.jmstofile.CamelJmsToFileExample</target.main.class>
+			</properties>
+		</profile>
+		<profile>
+			<id>Weblogic</id>
+			<properties>
+				<target.main.class>org.apache.camel.example.jmstofile.WeblogicJmsToFileExample</target.main.class>
 			</properties>
 		</profile>
 	</profiles>

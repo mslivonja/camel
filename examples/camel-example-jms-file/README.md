@@ -16,7 +16,10 @@ You will need to compile this example first:
   
 The example should run if you type
 
-	mvn exec:java -PExample
+	mvn exec:java -PActiveMQ - Example using ActiveMQ JMS message broker
+	mvn exec:java -PWeblogic - Example using Weblogic JMS message broker
+
+	java -cp camel-example-jms-file-2.17-SNAPSHOT.jar;"lib/*" org.apache.camel.example.jmstofile.WeblogicJmsToFileExample
 
 After the example is complete, then there should be 10 files written
 in the test directory.
