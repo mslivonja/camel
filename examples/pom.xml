@@ -74,6 +74,7 @@
     <module>camel-example-spring-boot-metrics</module>
     <module>camel-example-spring-javaconfig</module>
     <module>camel-example-spring-jms</module>
+      <module>camel-example-spring-wls-jms</module>
     <module>camel-example-spring-ws</module>
     <module>camel-example-spring-xquery</module>
     <module>camel-example-spring-security</module>
