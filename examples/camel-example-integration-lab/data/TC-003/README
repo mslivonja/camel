@@ -1,0 +1,21 @@
+Test status update WS SOAP operation
+
+Status update
+
+From: EOC
+To:   Granite
+
+Sent params(Request):
+    - ObjectType - VPN or vCPE
+    - ObjectId - VPNId or vCPEId
+    - New Status
+
+Received params(Response):
+     - result
+
+Comments:
+
+Transport layer: SOAP overt HTTP
+
+Testing with SOAP-UI:
+Send request 000-REQ.xml to http://localhost:9080/services/oss-uc and receive Ack. 000-RSP.xml.

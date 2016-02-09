@@ -1,0 +1,157 @@
+<getAllCustomerSiteResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://ipvpn.ossuc.com">
+    <getAllCustomerSiteReturn >
+        <siteInformationArray>
+            <item>
+                <ceEquipInstId>EM-002-001</ceEquipInstId>
+                <cePortInstId>97930</cePortInstId>
+                <ceSiteAddress>1 Wale St</ceSiteAddress>
+                <ceSiteId>EM-002</ceSiteId>
+                <ceSiteName>EMERALD/RSA</ceSiteName>
+                <peEquipInstId>POP-002-001</peEquipInstId>
+                <pePortInstId>97611</pePortInstId>
+                <peSiteAddress>1 Lower Buitengracht</peSiteAddress>
+                <peSiteId>POP-002</peSiteId>
+                <peSiteName>RSA POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-002-001/POP-002-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-003-001</ceEquipInstId>
+                <cePortInstId>97948</cePortInstId>
+                <ceSiteAddress>Alameda Santos</ceSiteAddress>
+                <ceSiteId>EM-003</ceSiteId>
+                <ceSiteName>EMERALD/BRAZIL</ceSiteName>
+                <peEquipInstId>POP-003-001</peEquipInstId>
+                <pePortInstId>97675</pePortInstId>
+                <peSiteAddress>Av. das Nações Unidas,</peSiteAddress>
+                <peSiteId>POP-003</peSiteId>
+                <peSiteName>BRAZIL POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-003-001/POP-003-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-004-001</ceEquipInstId>
+                <cePortInstId>97966</cePortInstId>
+                <ceSiteAddress>Av. Corrientes 1334</ceSiteAddress>
+                <ceSiteId>EM-004</ceSiteId>
+                <ceSiteName>EMERALD/ARGENTINA</ceSiteName>
+                <peEquipInstId>POP-004-001</peEquipInstId>
+                <pePortInstId>97739</pePortInstId>
+                <peSiteAddress>Arroyo 841</peSiteAddress>
+                <peSiteId>POP-004</peSiteId>
+                <peSiteName>ARGENTINA POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-004-001/POP-004-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-005-001</ceEquipInstId>
+                <cePortInstId>97984</cePortInstId>
+                <ceSiteAddress>Andrés Bello 29</ceSiteAddress>
+                <ceSiteId>EM-005</ceSiteId>
+                <ceSiteName>EMERALD/MEXICO</ceSiteName>
+                <peEquipInstId>POP-005-001</peEquipInstId>
+                <pePortInstId>97547</pePortInstId>
+                <peSiteAddress>Isabel La Católica 30</peSiteAddress>
+                <peSiteId>POP-005</peSiteId>
+                <peSiteName>MEXICO POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-005-001/POP-005-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-006-001</ceEquipInstId>
+                <cePortInstId>97346</cePortInstId>
+                <ceSiteAddress>Avenue Henri Dunant</ceSiteAddress>
+                <ceSiteId>EM-006</ceSiteId>
+                <ceSiteName>EMERALD/BELGIUM</ceSiteName>
+                <peEquipInstId>POP-006-001</peEquipInstId>
+                <pePortInstId>97483</pePortInstId>
+                <peSiteAddress>Avenue Des Montane</peSiteAddress>
+                <peSiteId>POP-006</peSiteId>
+                <peSiteName>BELGIUM POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-006-001/POP-006-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-008-001</ceEquipInstId>
+                <cePortInstId>98084</cePortInstId>
+                <ceSiteAddress>del Mortaro</ceSiteAddress>
+                <ceSiteId>EM-008</ceSiteId>
+                <ceSiteName>EMERALD/ITALY</ceSiteName>
+                <peEquipInstId>POP-008-001</peEquipInstId>
+                <pePortInstId>98125</pePortInstId>
+                <peSiteAddress>Piazzale Porta Pia</peSiteAddress>
+                <peSiteId>POP-008</peSiteId>
+                <peSiteName>ITALY POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-008-001/POP-008-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-009-001</ceEquipInstId>
+                <cePortInstId>98166</cePortInstId>
+                <ceSiteAddress>Dalal Street</ceSiteAddress>
+                <ceSiteId>EM-009</ceSiteId>
+                <ceSiteName>EMERALD/INDIA</ceSiteName>
+                <peEquipInstId>POP-009-001</peEquipInstId>
+                <pePortInstId>98207</pePortInstId>
+                <peSiteAddress>Vile Parle East</peSiteAddress>
+                <peSiteId>POP-009</peSiteId>
+                <peSiteName>INDIA POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-009-001/POP-009-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-010-001</ceEquipInstId>
+                <cePortInstId>98248</cePortInstId>
+                <ceSiteAddress>Financial Centre Road</ceSiteAddress>
+                <ceSiteId>EM-010</ceSiteId>
+                <ceSiteName>EMERALD/UAE</ceSiteName>
+                <peEquipInstId>POP-010-001</peEquipInstId>
+                <pePortInstId>98289</pePortInstId>
+                <peSiteAddress>Sheikh Mohammed bin Rashid Blv</peSiteAddress>
+                <peSiteId>POP-010</peSiteId>
+                <peSiteName>UAE POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-010-001/POP-010-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-001-001</ceEquipInstId>
+                <cePortInstId>97848</cePortInstId>
+                <ceSiteAddress>Paradise Circus</ceSiteAddress>
+                <ceSiteId>EM-001</ceSiteId>
+                <ceSiteName>EMERALD/UK (HQ)</ceSiteName>
+                <peEquipInstId>POP-001-001</peEquipInstId>
+                <pePortInstId>97889</pePortInstId>
+                <peSiteAddress>245 Broad St</peSiteAddress>
+                <peSiteId>POP-001</peSiteId>
+                <peSiteName>UK POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-001-001/POP-001-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+            <item>
+                <ceEquipInstId>EM-007-001</ceEquipInstId>
+                <cePortInstId>98002</cePortInstId>
+                <ceSiteAddress>18 Rue de Dunkerque</ceSiteAddress>
+                <ceSiteId>EM-007</ceSiteId>
+                <ceSiteName>EMERALD/FRANCE</ceSiteName>
+                <peEquipInstId>POP-007-001</peEquipInstId>
+                <pePortInstId>98043</pePortInstId>
+                <peSiteAddress>Rue de Montholon</peSiteAddress>
+                <peSiteId>POP-007</peSiteId>
+                <peSiteName>FRANCE POP</peSiteName>
+                <routerPathBandwidth>1Gbps</routerPathBandwidth>
+                <routerPathName>EM-007-001/POP-007-001</routerPathName>
+                <routerPathType>Access Link</routerPathType>
+            </item>
+        </siteInformationArray>
+    </getAllCustomerSiteReturn>
+</getAllCustomerSiteResponse>

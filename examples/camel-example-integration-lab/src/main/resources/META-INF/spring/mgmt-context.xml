@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!--START SNIPPET: e1 -->
+
+  <!-- here we have Spring XML file with all the namespaces here in the top of the XML file -->
+  <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:camel="http://camel.apache.org/schema/spring" xmlns:cxf="http://camel.apache.org/schema/cxf"
+         xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+         http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+    <!-- this CamelContext contains the equivalent route from the Java DSL, but in XML
+       so end users can see how to implement the route in both Java and XML -->
+    <camelContext id="mgmt-server" xmlns="http://camel.apache.org/schema/spring">
+      <!-- configure rest to use the camel-servlet component, and use json binding mode -->
+      <!-- and tell to output json in pretty print mode -->
+      <!-- setup context path and port number that Apache Tomcat will deploy this application with,
+           as we use the servlet component, then we need to aid Camel to tell it these details so Camel
+           knows the url to the REST services.
+           Notice: This is optional, but needed if the RestRegistry should enlist accurate information.
+           You can access the RestRegistry from JMX at runtime -->
+      <restConfiguration component="servlet" bindingMode="json" contextPath="rest" port="8080">
+        <dataFormatProperty key="prettyPrint" value="true"/>
+      </restConfiguration>
+
+      <!-- REST :: Test - create vCPE -->
+      <!-- defines the rest services using the context-path /orders -->
+      <rest  path="/mgmt" consumes="application/xml" produces="application/xml">
+        <description>Test tools REST API service</description>
+
+        <get uri="/TC" outType="org.apache.camel.example.model.TestCase">
+          <description>Get current test case code</description>
+          <responseMessage message="Current test case"/>
+          <route>
+            <bean ref="testCaseManager" method="getActiveTestCase"/>
+          </route>
+        </get>
+
+        <post uri="/TC/{code}">
+          <description>Set active test case using given code and restart test manager</description>
+          <param name="code" type="path" description="The code of test case to use" dataType="string"/>
+          <route>
+            <to uri="bean:testCaseManager?method=setActiveTestCase(${header.code})"/>
+          </route>
+        </post>
+
+        <get uri="/TS" outType="java.lang.Integer">
+          <description>Get current test step sequence ID</description>
+          <responseMessage message="Current test step ID"/>
+          <route>
+            <bean ref="testCaseManager" method="getCurrentTestStepId"/>
+          </route>
+        </get>
+
+        <post uri="/TS/{seq}">
+          <description>Set Test step id for active test case</description>
+          <param name="code" type="path" description="Sequence id  of current test step" dataType="integer"/>
+          <route>
+            <to uri="bean:testCaseManager?method=setCurrentTestStepId(${header.seq})"/>
+          </route>
+        </post>
+
+        <get uri="/ping">
+          <description>A ping service</description>
+          <route>
+            <transform>
+              <constant>pong</constant>
+            </transform>
+          </route>
+        </get>
+
+      </rest>
+    </camelContext>
+  </beans>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="24b78f23-300e-4afc-9858-8f5971c94b18" activeEnvironment="Default" name="Integration Lab." resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="903edc5f-0663-4354-9f6f-f8a7f23a6231" wsaVersion="NONE" name="OSSUCServiceSoapBinding" type="wsdl" bindingName="{http://ipvpn.ossuc.com}OSSUCServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:9080/services/WS/oss-uc?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9080/services/WS/oss-uc?wsdl"><con:part><con:url>http://localhost:9080/services/WS/oss-uc?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ipvpn.ossuc.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:intf="http://ipvpn.ossuc.com" xmlns:impl="http://ipvpn.ossuc.com" xmlns:apachesoap="http://xml.apache.org/xml-soap">
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://ipvpn.ossuc.com" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="updateStatus">
+        <complexType>
+          <sequence>
+            <element name="objectType" type="xsd:string"/>
+            <element name="objectId" type="xsd:string"/>
+            <element name="status" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="updateStatusResponse">
+        <complexType>
+          <sequence>
+            <element name="updateStatusReturn" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getAllCustomerSite">
+        <complexType>
+          <sequence>
+            <element name="searchCustomer" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getAllCustomerSiteResponse">
+        <complexType>
+          <sequence>
+            <element name="getAllCustomerSiteReturn" type="impl:CustomerSiteDetails"/>
+          </sequence>
+        </complexType>
+      </element>
+      <complexType name="SiteInformation">
+        <sequence>
+          <element name="ceEquipInstId" nillable="true" type="xsd:string"/>
+          <element name="cePortInstId" nillable="true" type="xsd:long"/>
+          <element name="ceSiteAddress" nillable="true" type="xsd:string"/>
+          <element name="ceSiteId" nillable="true" type="xsd:string"/>
+          <element name="ceSiteName" nillable="true" type="xsd:string"/>
+          <element name="peEquipInstId" nillable="true" type="xsd:string"/>
+          <element name="pePortInstId" nillable="true" type="xsd:long"/>
+          <element name="peSiteAddress" nillable="true" type="xsd:string"/>
+          <element name="peSiteId" nillable="true" type="xsd:string"/>
+          <element name="peSiteName" nillable="true" type="xsd:string"/>
+          <element name="routerPathBandwidth" nillable="true" type="xsd:string"/>
+          <element name="routerPathName" nillable="true" type="xsd:string"/>
+          <element name="routerPathType" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="ArrayOfSiteInformation">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SiteInformation"/>
+        </sequence>
+      </complexType>
+      <complexType name="CustomerSiteDetails">
+        <sequence>
+          <element name="siteInformationArray" nillable="true" type="impl:ArrayOfSiteInformation"/>
+        </sequence>
+      </complexType>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="getAllCustomerSiteResponse">
+    <wsdl:part element="impl:getAllCustomerSiteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateStatusRequest">
+    <wsdl:part element="impl:updateStatus" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllCustomerSiteRequest">
+    <wsdl:part element="impl:getAllCustomerSite" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateStatusResponse">
+    <wsdl:part element="impl:updateStatusResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="OSSUCService">
+    <wsdl:operation name="updateStatus">
+      <wsdl:input message="impl:updateStatusRequest" name="updateStatusRequest"></wsdl:input>
+      <wsdl:output message="impl:updateStatusResponse" name="updateStatusResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCustomerSite">
+      <wsdl:input message="impl:getAllCustomerSiteRequest" name="getAllCustomerSiteRequest"></wsdl:input>
+      <wsdl:output message="impl:getAllCustomerSiteResponse" name="getAllCustomerSiteResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OSSUCServiceSoapBinding" type="impl:OSSUCService">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="updateStatus">
+      <wsdlsoap:operation soapAction="updateStatus"/>
+      <wsdl:input name="updateStatusRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateStatusResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCustomerSite">
+      <wsdlsoap:operation soapAction="getAllCustomerSite"/>
+      <wsdl:input name="getAllCustomerSiteRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllCustomerSiteResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OSSUCServiceService">
+    <wsdl:port binding="impl:OSSUCServiceSoapBinding" name="OSSUCService">
+      <wsdlsoap:address location="http://localhost:9080/services/WS/oss-uc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://HR00089234:8088/mockOSSUCServiceSoapBinding</con:endpoint><con:endpoint>http://localhost:9080/camel-example-integration-lab/oss-uc-service</con:endpoint><con:endpoint>http://localhost:9080/services/WS/oss-uc</con:endpoint><con:endpoint>http://localhost:9080/services/oss-uc</con:endpoint></con:endpoints><con:operation id="e11912e0-51da-452f-9226-9b8953a8864b" isOneWay="false" action="getAllCustomerSite" name="getAllCustomerSite" bindingOperationName="getAllCustomerSite" type="Request-Response" outputName="getAllCustomerSiteResponse" inputName="getAllCustomerSiteRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5411dd90-bee2-4408-a2e7-d959eed79d36" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9080/services/WS/oss-uc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ipv="http://ipvpn.ossuc.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ipv:getAllCustomerSite>\r
+         <ipv:searchCustomer>John Doe</ipv:searchCustomer>\r
+      </ipv:getAllCustomerSite>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="getAllCustomerSite"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="aa7b3ea8-fa45-4f12-bb14-da34238800bf" isOneWay="false" action="updateStatus" name="updateStatus" bindingOperationName="updateStatus" type="Request-Response" outputName="updateStatusResponse" inputName="updateStatusRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1a3679b9-1fe7-44c3-806c-0342a6f56d63" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9080/services/WS/oss-uc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ipv="http://ipvpn.ossuc.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ipv:updateStatus>\r
+         <ipv:objectType>SITE</ipv:objectType>\r
+         <ipv:objectId>CE-ROUTER</ipv:objectId>\r
+         <ipv:status>LIVE</ipv:status>\r
+      </ipv:updateStatus>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="updateStatus"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="b0653614-7f9e-41b6-bac1-1eb4cc33bb9e" wsaVersion="NONE" name="EMAServiceSoapBinding" type="wsdl" bindingName="{http://ipvpn.ossuc.com}EMAServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:9080/services/WS/ema?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9080/services/WS/ema?wsdl"><con:part><con:url>http://localhost:9080/services/WS/ema?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ipvpn.ossuc.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:intf="http://ipvpn.ossuc.com" xmlns:impl="http://ipvpn.ossuc.com" xmlns:apachesoap="http://xml.apache.org/xml-soap">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://ipvpn.ossuc.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:include schemaLocation="http://localhost:9080/services/WS/ema?xsd=IPVPNServiceOverJMS.xsd"/>
+      <xs:element name="activateVPN" type="impl:vpnServiceType"/>
+      <xs:element name="activateVPNResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="result" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="activateCPE">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="vCPEId" type="xs:int"/>
+            <xs:element name="ipAddress" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="activateCPEResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="result" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="activateVPNResponse">
+    <wsdl:part element="impl:activateVPNResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="activateVPNRequest">
+    <wsdl:part element="impl:activateVPN" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="activateCPEResponse">
+    <wsdl:part element="impl:activateCPEResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="activateCPERequest">
+    <wsdl:part element="impl:activateCPE" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EMAService">
+    <wsdl:operation name="activateVPN">
+      <wsdl:input message="impl:activateVPNRequest" name="activateVPNRequest"></wsdl:input>
+      <wsdl:output message="impl:activateVPNResponse" name="activateVPNResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="activateCPE">
+      <wsdl:input message="impl:activateCPERequest" name="activateCPERequest"></wsdl:input>
+      <wsdl:output message="impl:activateCPEResponse" name="activateCPEResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EMAServiceSoapBinding" type="impl:EMAService">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="activateVPN">
+      <wsdlsoap:operation soapAction="activateVPN"/>
+      <wsdl:input name="activateVPNRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="activateVPNResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="activateCPE">
+      <wsdlsoap:operation soapAction="activateCPE"/>
+      <wsdl:input name="activateCPERequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="activateCPEResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EMAServiceService">
+    <wsdl:port binding="impl:EMAServiceSoapBinding" name="EMAService">
+      <wsdlsoap:address location="http://localhost:9080/services/WS/ema"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:9080/services/WS/ema?xsd=IPVPNServiceOverJMS.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://ipvpn.ossuc.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://ipvpn.ossuc.com" xmlns="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="createIPVPNService" type="impl:vpnServiceType"/>
+  <xs:complexType name="vpnServiceType">
+    <xs:sequence>
+      <xs:element name="vpnId" type="xs:string"/>
+      <xs:element name="managedAccess" type="impl:booleanType"/>
+      <xs:element name="vrfNamePrefix" type="xs:string"/>
+      <xs:element name="topology" type="impl:topologyType"/>
+      <xs:element name="listOfCEPE" type="impl:listOfCEPEType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listOfCEPEType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="CEPE" type="impl:CEPEType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CEPEType">
+    <xs:sequence>
+      <xs:element name="cePortId" type="xs:long"/>
+      <xs:element name="pePortId" type="xs:long"/>
+      <xs:element name="endPointRole" type="impl:topologyType"/>
+      <xs:element name="cosHCir" type="xs:string"/>
+      <xs:element name="cosMCir" type="xs:string"/>
+      <xs:element name="cosLCir" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="topologyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Mesh"/>
+      <xs:enumeration value="Point-to-point"/>
+      <xs:enumeration value="Bus"/>
+      <xs:enumeration value="Star"/>
+      <xs:enumeration value="Ring"/>
+      <xs:enumeration value="Tree"/>
+      <xs:enumeration value="Hybrid"/>
+      <xs:enumeration value="Daisy chain"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="booleanType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Yes"/>
+      <xs:enumeration value="No"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="createIPVPNServiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="createIPVPNServiceReturn" type="xs:string"/>
+        <xs:element name="vpnId" type="xs:string"/>
+        <xs:element name="listOfvCPE" type="impl:listOfvCPEType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="listOfvCPEType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="vCPE" type="impl:vCPEType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vCPEType">
+    <xs:sequence>
+      <xs:element name="vCpeId" type="xs:string"/>
+      <xs:element name="vCpeStatus" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9080/services/EMAService</con:endpoint><con:endpoint>http://localhost:9080/services/WS/ema</con:endpoint><con:endpoint>http://localhost:9080/services/ema</con:endpoint></con:endpoints><con:operation id="f4225295-4966-41c7-b426-437b19ca85db" isOneWay="false" action="activateCPE" name="activateCPE" bindingOperationName="activateCPE" type="Request-Response" outputName="activateCPEResponse" inputName="activateCPERequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3ad1b24d-3c11-41f6-8a4e-cb19c60808ab" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9080/services/WS/ema</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ipv="http://ipvpn.ossuc.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ipv:activateCPE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\r
+         <ipv:vCPEId>1234</ipv:vCPEId>\r
+         <ipv:ipAddress>172.12.54.28</ipv:ipAddress>\r
+      </ipv:activateCPE>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="activateCPE"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="c39536f2-2264-4b46-923d-e2ca882e7cee" isOneWay="false" action="activateVPN" name="activateVPN" bindingOperationName="activateVPN" type="Request-Response" outputName="activateVPNResponse" inputName="activateVPNRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="56e91ce4-dfd2-404f-b8ce-be78449e0d33" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9080/services/WS/ema</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ipv="http://ipvpn.ossuc.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ipv:activateVPN xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <ipv:vpnId>vpnEmrald01</ipv:vpnId>
+         <ipv:managedAccess>Yes</ipv:managedAccess>
+         <ipv:vrfNamePrefix>EMERALD</ipv:vrfNamePrefix>
+         <ipv:topology>Mesh</ipv:topology>
+         <ipv:listOfCEPE>
+            <!--1 or more repetitions:-->
+            <ipv:CEPE>
+               <ipv:cePortId>97930</ipv:cePortId>
+               <ipv:pePortId>97611</ipv:pePortId>
+               <ipv:endPointRole>Mesh</ipv:endPointRole>
+               <ipv:cosHCir>1000Mbps</ipv:cosHCir>
+               <ipv:cosMCir>500Mbps</ipv:cosMCir>
+               <ipv:cosLCir>50Mbps</ipv:cosLCir>
+            </ipv:CEPE>
+         </ipv:listOfCEPE>
+      </ipv:activateVPN>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="activateVPN"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

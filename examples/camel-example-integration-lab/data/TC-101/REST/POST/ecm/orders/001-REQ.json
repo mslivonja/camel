@@ -1,0 +1,42 @@
+{
+  "tenantName":"Emerald",
+  "orderItems":[
+    {
+      "orderItemId":"1",
+      "createVapp":{
+        "name":"VCPE-EM-001",
+        "id":"VCPE-EM-001",
+        "type":"VCPE",
+        "description":"Virtualized Customer Router",
+        "productInfo":{
+          "vendor":"Ericsson",
+          "version":"1.0.0"
+        },
+        "vdc":{
+          "id":"MWC_VDC-3145"
+        }
+      },
+      "vm":[
+        {
+          "id":"MWC_VM_001-3177",
+          "vdc":{
+            "id":"MWC_VDC-3145"
+          },
+          "vmhdName":"m1.tiny",
+          "bootsource":{
+            "imageName":"cirros"
+          }
+        }
+      ],
+      "vmVnics":[
+        {
+          "name":"MWC_Network_001",
+          "vn":{
+            "id":"MWC_Network_001-3159"
+          },
+          "assignExternalIpAddress":true
+        }
+      ]
+    }
+  ]
+}

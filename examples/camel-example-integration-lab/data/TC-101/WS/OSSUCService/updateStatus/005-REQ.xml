@@ -1,0 +1,6 @@
+<ipv:updateStatus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ipv="http://ipvpn.ossuc.com">
+    <ipv:objectType>vCPE</ipv:objectType>
+    <ipv:objectId>VCPE-EM-002</ipv:objectId>
+    <ipv:status>READY</ipv:status>
+</ipv:updateStatus>

@@ -1,0 +1,36 @@
+Test get all customer sites WS SOAP operation
+
+getAllCustomerSites
+
+From: EOC
+To:   Granite
+
+Sent params(Request):
+    - customer_id
+
+Received params(Response):
+     - list of
+        - siteName
+        - siteId?
+        - siteAddress
+        - AccessLinkId
+        - Bandwidth
+        - LinkType
+        - Customer Location Id
+        - CE Port Id
+        - CE Equipment Id
+        - CE PE Location Id
+        - CE Port Id
+        - CE Equipment Id
+
+Comments:
+    Only sites associated to customer, and with access connectivity
+    In Granite we will associate each customer with a set of sites. (Customer names need to be manually aligned)
+    Granite API provides a customer.getSites() function that can be used to return a list of site names
+    For each site, there will be only one access path, so in the same query all details will be responded.s)
+    Once the access link is selected, all the other attributes/objects can be completed in the EOC GUI
+
+Transport layer: SOAP overt HTTP
+
+Testing with SOAP-UI:
+Send request 000-REQ.xml to http://localhost:9080/services/oss-uc and receive Ack. 000-RSP.xml.

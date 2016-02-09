@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ipvpn.ossuc.com"
+   xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ipvpn.ossuc.com"
+   xmlns:intf="http://ipvpn.ossuc.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+   <wsdl:types>
+      <schema elementFormDefault="qualified" targetNamespace="http://ipvpn.ossuc.com"
+         xmlns="http://www.w3.org/2001/XMLSchema">
+         <element name="updateStatus">
+            <complexType>
+               <sequence>
+                  <element name="objectType" type="xsd:string"/>
+                  <element name="objectId" type="xsd:string"/>
+                  <element name="status" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element>
+         <element name="updateStatusResponse">
+            <complexType>
+               <sequence>
+                  <element name="updateStatusReturn" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element>
+         <element name="getAllCustomerSite">
+            <complexType>
+               <sequence>
+                  <element name="searchCustomer" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element>
+         <element name="getAllCustomerSiteResponse">
+            <complexType>
+               <sequence>
+                  <element name="getAllCustomerSiteReturn" type="impl:CustomerSiteDetails"/>
+               </sequence>
+            </complexType>
+         </element>
+         <complexType name="SiteInformation">
+            <sequence>
+               <element name="ceEquipInstId" nillable="true" type="xsd:string"/>
+               <element name="cePortInstId" nillable="true" type="xsd:long"/>
+               <element name="ceSiteAddress" nillable="true" type="xsd:string"/>
+               <element name="ceSiteId" nillable="true" type="xsd:string"/>
+               <element name="ceSiteName" nillable="true" type="xsd:string"/>
+               <element name="peEquipInstId" nillable="true" type="xsd:string"/>
+               <element name="pePortInstId" nillable="true" type="xsd:long"/>
+               <element name="peSiteAddress" nillable="true" type="xsd:string"/>
+               <element name="peSiteId" nillable="true" type="xsd:string"/>
+               <element name="peSiteName" nillable="true" type="xsd:string"/>
+               <element name="routerPathBandwidth" nillable="true" type="xsd:string"/>
+               <element name="routerPathName" nillable="true" type="xsd:string"/>
+               <element name="routerPathType" nillable="true" type="xsd:string"/>
+            </sequence>
+         </complexType>
+         <complexType name="ArrayOfSiteInformation">
+            <sequence>
+               <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SiteInformation"
+               />
+            </sequence>
+         </complexType>
+         <complexType name="CustomerSiteDetails">
+            <sequence>
+               <element name="siteInformationArray" nillable="true"
+                  type="impl:ArrayOfSiteInformation"/>
+            </sequence>
+         </complexType>
+      </schema>
+   </wsdl:types>
+
+   <wsdl:message name="getAllCustomerSiteResponse">
+
+      <wsdl:part element="impl:getAllCustomerSiteResponse" name="parameters"> </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateStatusRequest">
+
+      <wsdl:part element="impl:updateStatus" name="parameters"> </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllCustomerSiteRequest">
+
+      <wsdl:part element="impl:getAllCustomerSite" name="parameters"> </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateStatusResponse">
+
+      <wsdl:part element="impl:updateStatusResponse" name="parameters"> </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="OSSUCService">
+
+      <wsdl:operation name="updateStatus">
+
+         <wsdl:input message="impl:updateStatusRequest" name="updateStatusRequest"> </wsdl:input>
+
+         <wsdl:output message="impl:updateStatusResponse" name="updateStatusResponse"> </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCustomerSite">
+
+         <wsdl:input message="impl:getAllCustomerSiteRequest" name="getAllCustomerSiteRequest"> </wsdl:input>
+
+         <wsdl:output message="impl:getAllCustomerSiteResponse" name="getAllCustomerSiteResponse"> </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="OSSUCServiceSoapBinding" type="impl:OSSUCService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="updateStatus">
+
+         <wsdlsoap:operation soapAction="updateStatus"/>
+
+         <wsdl:input name="updateStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCustomerSite">
+
+         <wsdlsoap:operation soapAction="getAllCustomerSite"/>
+
+         <wsdl:input name="getAllCustomerSiteRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllCustomerSiteResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="OSSUCServiceService">
+
+      <wsdl:port binding="impl:OSSUCServiceSoapBinding" name="OSSUCService">
+
+         <wsdlsoap:address location="http://localhost:9080/services/oss-uc"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,8 @@
+Test EOC TAS
+
+EOC -> Granite: getAllCustomerSite will return always same result
+
+TAS:Activate
+
+EOC -> EMA: activate vCPE
+EOC -> EMA: activate VPN

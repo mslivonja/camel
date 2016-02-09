@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://ipvpn.ossuc.com" xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:impl="http://ipvpn.ossuc.com">
+    <xs:element name="createIPVPNService" type="impl:vpnServiceType"/>
+    
+    <xs:complexType name="vpnServiceType">
+        <xs:sequence>
+            <xs:element name="vpnId" type="xs:string"/>
+            <xs:element name="managedAccess" type="impl:booleanType"/>
+            <xs:element name="vrfNamePrefix" type="xs:string"/>
+            <xs:element name="topology" type="impl:topologyType"/>
+            <xs:element name="listOfCEPE" type="impl:listOfCEPEType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="listOfCEPEType">
+        <xs:sequence>
+            <xs:element name="CEPE" type="impl:CEPEType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CEPEType">
+        <xs:sequence>
+            <xs:element name="cePortId" type="xs:long"/>
+            <xs:element name="pePortId" type="xs:long"/>
+            <xs:element name="endPointRole" type="impl:topologyType"/>
+            <xs:element name="cosHCir" type="xs:string"/>
+            <xs:element name="cosMCir" type="xs:string"/>
+            <xs:element name="cosLCir" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="topologyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Mesh"/>
+            <xs:enumeration value="Point-to-point"/>
+            <xs:enumeration value="Bus"/>
+            <xs:enumeration value="Star"/>
+            <xs:enumeration value="Ring"/>
+            <xs:enumeration value="Tree"/>
+            <xs:enumeration value="Hybrid"/>
+            <xs:enumeration value="Daisy chain"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="booleanType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Yes"/>
+            <xs:enumeration value="No"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="createIPVPNServiceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="createIPVPNServiceReturn" type="xs:string"/>
+                <xs:element name="vpnId" type="xs:string"/>
+                <xs:element name="listOfvCPE" type="impl:listOfvCPEType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="listOfvCPEType">
+        <xs:sequence>
+            <xs:element name="vCPE" type="impl:vCPEType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="vCPEType">
+        <xs:sequence>
+            <xs:element name="vCpeId" type="xs:string"/>
+            <xs:element name="vCpeStatus" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

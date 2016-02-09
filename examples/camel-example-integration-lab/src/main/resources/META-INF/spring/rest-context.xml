@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--START SNIPPET: e1 -->
+
+<!-- here we have Spring XML file with all the namespaces here in the top of the XML file -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:spring-security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+         http://camel.apache.org/schema/spring-security http://camel.apache.org/schema/spring-security/camel-spring-security.xsd
+         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <spring-security:http realm="User ECM Service Restrict Realm">
+        <spring-security:intercept-url pattern="/services/REST/ecm/orders/**" access="ROLE_USER"/>
+        <spring-security:http-basic/>
+        <spring-security:remember-me/>
+    </spring-security:http>
+
+    <!--  set up the user configuration here -->
+    <spring-security:authentication-manager alias="authenticationManager">
+        <spring-security:authentication-provider user-service-ref="userDetailsService"/>
+    </spring-security:authentication-manager>
+
+    <spring-security:user-service id="userDetailsService">
+        <spring-security:user name="user" password="user!01" authorities="ROLE_USER"/>
+    </spring-security:user-service>
+
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <property name="allowIfAllAbstainDecisions" value="true"/>
+        <property name="decisionVoters">
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- The Policy for checking the authentication role of USER -->
+    <authorizationPolicy id="user" access="ROLE_USER"
+                         xmlns="http://camel.apache.org/schema/spring-security"/>
+
+    <!-- this CamelContext contains the equivalent route from the Java DSL, but in XML
+       so end users can see how to implement the route in both Java and XML -->
+    <camelContext id="rest-server" xmlns="http://camel.apache.org/schema/spring">
+
+        <!-- Data formats -->
+        <dataFormats>
+            <json id="jack" library="Jackson" unmarshalTypeName="se.ericsson.ecmgui.model.CreateVCpeResponse"/>
+        </dataFormats>
+
+        <!-- Catch the authorization exception and set the Access Denied message back -->
+        <onException>
+            <exception>org.apache.camel.CamelAuthorizationException</exception>
+            <handled>
+                <constant>true</constant>
+            </handled>
+            <transform>
+                <simple>Access Denied with the Policy of ${exception.policyId} !</simple>
+            </transform>
+        </onException>
+
+        <!-- configure rest to use the camel-servlet component, and use json binding mode -->
+        <!-- and tell to output json in pretty print mode -->
+        <!-- setup context path and port number that Apache Tomcat will deploy this application with,
+             as we use the servlet component, then we need to aid Camel to tell it these details so Camel
+             knows the url to the REST services.
+             Notice: This is optional, but needed if the RestRegistry should enlist accurate information.
+             You can access the RestRegistry from JMX at runtime -->
+        <restConfiguration component="servlet" bindingMode="json" contextPath="/services/REST" port="8080">
+            <dataFormatProperty key="prettyPrint" value="true"/>
+        </restConfiguration>
+
+        <!-- REST :: ECloud manager - create vCPE -->
+        <!-- defines the rest services using the context-path /orders -->
+        <!-- complete path /services/REST/ecm-service -->
+        <rest path="/ecm" consumes="application/json" produces="application/json">
+            <description>vAPP REST API service</description>
+
+            <post uri="/orders" type="se.ericsson.ecmgui.model.CreateVCpeRequest"
+                                outType="se.ericsson.ecmgui.model.CreateVCpeResponse">
+                <description>vAPP API - create vCPE</description>
+                <param name="body" type="body" description="Create vCPE request"/>
+                <responseMessage message="Create vCPE response message"/>
+                <!-- Log input request -->
+                <route>
+                    <policy ref="user">
+                        <log message="Received REST request"/>
+                        <!-- Log input request -->
+                        <to uri="log:org.apache.camel.example?level=DEBUG"/>
+                        <!-- Resolve next test step-->
+                        <setHeader headerName="TestStep">
+                            <method bean="testCaseManager" method="getNextTestStep"/>
+                        </setHeader>
+                        <!-- TODO: Validate request -->
+                        <!-- Consume file response -->
+                        <transform>
+                            <simple>${headers.TestStep.response}</simple>
+                        </transform>
+                        <!-- Unmarshall response to CreateVCpeResponse -->
+                        <unmarshal ref="jack"/>
+                        <!-- Log output response -->
+                        <to uri="log:org.apache.camel.example?level=DEBUG"/>
+                    </policy>
+                </route>
+            </post>
+
+        </rest>
+    </camelContext>
+</beans>

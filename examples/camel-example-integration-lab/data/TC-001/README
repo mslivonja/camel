@@ -1,0 +1,48 @@
+Test service design function.
+
+ServiceDesignFunction
+
+From: EOC
+To:   Granite
+
+Sent params(Request):
+    - VPN Id
+    - Managed Access
+    - VRF Name prefix
+    - Topology
+    - list of
+        - CE Port Id
+        - PE Port Id
+        - End Point Role
+        - CosH_CIR
+        - CosM_CIR
+        - Cost_CIR
+
+Received params(Response):
+     - result
+     - list of required P2P
+        - vCPE id
+        - vCPE image name
+        - vCPE VimZone
+
+Comments:
+    Create IPVPN Object (pending)
+    Create VRF associated with each PE Shelf
+    Create vCPE in DC associated with PE location (pending)
+    Create Connection Group from PE to vCPE (new PE port)
+    Create Connection Group from vCPE to CE (CE port from order)
+    Return vCPE details to EOC
+
+Transport layer: JMS
+
+Testing with HermesJMS:
+Send request 000-REQ.xml to xng/jms/IncomingMessageQueue and listen on xng/jms/OutgoingMessageQueue for response.
+
+
+
+
+
+
+
+
+

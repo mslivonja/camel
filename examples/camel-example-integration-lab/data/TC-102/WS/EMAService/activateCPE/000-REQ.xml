@@ -1,0 +1,5 @@
+<ipv:activateCPE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                   xmlns:ipv="http://ipvpn.ossuc.com">
+<ipv:vCPEId>1234</ipv:vCPEId>
+<ipv:ipAddress>172.12.54.28</ipv:ipAddress>
+</ipv:activateCPE>

@@ -1,0 +1,4 @@
+<ipv:getAllCustomerSite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xmlns:ipv="http://ipvpn.ossuc.com">
+    <ipv:searchCustomer>EMERALD</ipv:searchCustomer>
+</ipv:getAllCustomerSite>

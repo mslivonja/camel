@@ -1,0 +1,19 @@
+{
+  "tenantName": "Emerald",
+  "orderItems": [{
+    "orderItemId": "1",
+    "createVapp": {
+      "name": "VCPE-EM-002",
+      "id": "VCPE-EM-002",
+      "type": "VCPE",
+      "description": "Virtualized Customer Router",
+      "vdc": {
+        "id": "MWC_VDC-3145"
+      },
+      "productInfo": {
+        "vendor": "Ericsson",
+        "version": "1.0.0"
+      }
+    }
+  }]
+}

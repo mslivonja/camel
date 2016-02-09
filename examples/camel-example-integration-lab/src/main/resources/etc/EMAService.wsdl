@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ipvpn.ossuc.com"
+   xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ipvpn.ossuc.com"
+   xmlns:intf="http://ipvpn.ossuc.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <wsdl:types>
+      <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+         elementFormDefault="qualified"
+         targetNamespace="http://ipvpn.ossuc.com"
+         xmlns:impl="http://ipvpn.ossuc.com">
+         
+         <xs:include schemaLocation="IPVPNServiceOverJMS.xsd"/>
+         
+         <xs:element name="activateVPN" type="impl:vpnServiceType"/>
+         
+         <xs:element name="activateVPNResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="result" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         
+         <xs:element name="activateCPE">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="vCPEId" type="xs:int"/>
+                  <xs:element name="ipAddress" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         
+         <xs:element name="activateCPEResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="result" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         
+      </xs:schema>
+   </wsdl:types>
+
+   <wsdl:message name="activateVPNRequest">
+      <wsdl:part element="impl:activateVPN" name="parameters"> </wsdl:part>
+   </wsdl:message>
+
+   <wsdl:message name="activateVPNResponse">
+      <wsdl:part element="impl:activateVPNResponse" name="parameters"> </wsdl:part>
+   </wsdl:message>
+   
+   <wsdl:message name="activateCPERequest">
+      <wsdl:part element="impl:activateCPE" name="parameters"> </wsdl:part>
+   </wsdl:message>
+   
+   <wsdl:message name="activateCPEResponse">
+      <wsdl:part element="impl:activateCPEResponse" name="parameters"> </wsdl:part>
+   </wsdl:message>
+
+   <wsdl:portType name="EMAService">
+      <wsdl:operation name="activateVPN">
+         <wsdl:input message="impl:activateVPNRequest" name="activateVPNRequest"> </wsdl:input>
+         <wsdl:output message="impl:activateVPNResponse" name="activateVPNResponse"> </wsdl:output>
+      </wsdl:operation>
+      
+      <wsdl:operation name="activateCPE">
+         <wsdl:input message="impl:activateCPERequest" name="activateCPERequest"> </wsdl:input>
+         <wsdl:output message="impl:activateCPEResponse" name="activateCPEResponse"> </wsdl:output>
+      </wsdl:operation>
+   </wsdl:portType>
+
+   <wsdl:binding name="EMAServiceSoapBinding" type="impl:EMAService">
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <!-- Activate VPN -->
+      <wsdl:operation name="activateVPN">
+         <wsdlsoap:operation soapAction="activateVPN"/>
+         <wsdl:input name="activateVPNRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="activateVPNResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <!-- Activate CPE -->
+      <wsdl:operation name="activateCPE">
+         <wsdlsoap:operation soapAction="activateCPE"/>
+         <wsdl:input name="activateCPERequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="activateCPEResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="EMAServiceService">
+      <wsdl:port binding="impl:EMAServiceSoapBinding" name="EMAService">
+         <wsdlsoap:address location="http://localhost:9080/services/ema"/>
+      </wsdl:port>
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,19 @@
+<ipv:createIPVPNServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:ipv="http://ipvpn.ossuc.com">
+    <ipv:createIPVPNServiceReturn>Successful</ipv:createIPVPNServiceReturn>
+    <ipv:vpnId>vpnEmrald01</ipv:vpnId>
+    <ipv:listOfvCPE>
+        <ipv:vCPE>
+            <ipv:vCpeId>VCPE-EM-001</ipv:vCpeId>
+            <ipv:vCpeStatus>Pending</ipv:vCpeStatus>
+        </ipv:vCPE>
+        <ipv:vCPE>
+            <ipv:vCpeId>VCPE-EM-002</ipv:vCpeId>
+            <ipv:vCpeStatus>Live</ipv:vCpeStatus>
+        </ipv:vCPE>
+        <ipv:vCPE>
+            <ipv:vCpeId>VCPE-EM-002</ipv:vCpeId>
+            <ipv:vCpeStatus>Ordered</ipv:vCpeStatus>
+        </ipv:vCPE>
+    </ipv:listOfvCPE>
+</ipv:createIPVPNServiceResponse>

@@ -1,0 +1,20 @@
+Test status update WS SOAP operation
+
+Activate CPE
+
+From: EOC
+To:   Granite
+
+Sent params(Request):
+    - vCPEid
+    - ipAddress
+
+Received params(Response):
+     - result
+
+Comments:
+
+Transport layer: SOAP overt HTTP
+
+Testing with SOAP-UI:
+Send request 000-REQ.xml to http://localhost:9080/services/ema and receive Ack. 000-RSP.xml.

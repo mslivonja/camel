@@ -1,0 +1,8 @@
+Test EOC TAS
+
+TAS: Design L2S Service
+
+EOC -> Granite: getAllCustomerSite will return always same result
+
+EOC -> Granite: ServiceDesignFunction(vpn details for all sites, QoS profile)
+Granite -> EOC: Successful.

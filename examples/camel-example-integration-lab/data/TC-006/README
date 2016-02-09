@@ -1,0 +1,10 @@
+Test EOC TAS
+
+TAS: Design L2S Service
+
+EOC -> Granite: ServiceDesignFunction(vpn details for all sites, QoS profile)
+Granite -> EOC: Fails. Needs to create vCPE in a VimZone(type of vCPE, name of vimZone...)
+                Granite creates the vCPE in inventory state=PENDING
+                Granite creates the connection gropus in state=PENDING
+EOC -> ECloudM: create vCPE for each vCPE returned from Granite
+EOC -> Granite: Status update(vCPE, state=READY)

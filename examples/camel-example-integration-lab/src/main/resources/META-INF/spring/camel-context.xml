@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- here we have Spring XML file with all the namespaces here in the top of the XML file -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Response message validation -->
+  <bean id="responseValidation" class="org.apache.camel.example.util.ResponseValidation"/>
+
+  <!-- Test case manager: inference engine -->
+  <bean id="testCaseManager" class="org.apache.camel.example.util.SimpleTestCaseManager">
+    <property name="rootDir" value="data"/>
+  </bean>
+
+  <import resource="mgmt-context.xml"/>
+  <import resource="jms-context.xml"/>
+  <import resource="ws-ossuc-service-context.xml"/>
+  <import resource="ws-ema-service-context.xml"/>
+  <import resource="rest-context.xml"/>
+
+</beans>

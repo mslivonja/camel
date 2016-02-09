@@ -1,0 +1,6 @@
+<ipv:updateStatus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ipv="http://ipvpn.ossuc.com">
+    <ipv:objectType>SITE</ipv:objectType>
+    <ipv:objectId>CE-ROUTER</ipv:objectId>
+    <ipv:status>LIVE</ipv:status>
+</ipv:updateStatus>

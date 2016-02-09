@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--START SNIPPET: e1 -->
+
+<!-- here we have Spring XML file with all the namespaces here in the top of the XML file -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+         http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+    <!-- here we define the CXF endpoint, where {{port}} refers to a placeholder so we can define the port number
+           in an external .properties file -->
+    <cxf:cxfEndpoint id="ema"
+                     address="http://localhost:9080/services/WS/ema"
+                     wsdlURL="etc/EMAService.wsdl"
+                     serviceClass="com.ema.ipvpn.EMAService">
+        <cxf:properties>
+            <entry key="dataFormat" value="POJO"/>
+        </cxf:properties>
+    </cxf:cxfEndpoint>
+
+    <!-- this CamelContext contains the equivalent route from the Java DSL, but in XML
+       so end users can see how to implement the route in both Java and XML -->
+    <camelContext id="ws-ema-service-server" xmlns="http://camel.apache.org/schema/spring">
+
+        <!-- property which contains port number -->
+        <!-- we have file:target/custom.properties which can be optional and override existing values, we use this for testing purpose -->
+        <camel:propertyPlaceholder id="properties"
+                                   location="classpath:app.properties,file:target/custom.properties"
+                                   ignoreMissingLocation="true"/>
+
+        <!-- Data formats -->
+        <dataFormats>
+            <jaxb id="jaxb" prettyPrint="true" contextPath="com.ema.ipvpn"/>
+        </dataFormats>
+
+        <!-- WS :: OSSUCService -->
+        <route>
+            <from uri="cxf:bean:ema"/>
+            <!-- Log input request -->
+            <to uri="log:org.apache.camel.example?level=DEBUG"/>
+            <log message="Received EMA::WS request with SOAPAction['${header.SOAPAction}']"/>
+
+            <!-- Resolve next test step-->
+            <setHeader headerName="TestStep">
+                <method bean="testCaseManager" method="getNextTestStep"/>
+            </setHeader>
+            <!-- TODO: Validate request -->
+            <!-- Consume file response -->
+            <transform>
+                <simple>${headers.TestStep.response}</simple>
+            </transform>
+            <!-- Validate response -->
+            <process ref="responseValidation"/>
+            <choice>
+                <when>
+                    <simple>${header.SOAPAction} contains 'activateCPE'</simple>
+                    <to uri="seda:activateCPE"/>
+                </when>
+                <when>
+                    <simple>${header.SOAPAction} contains 'activateVPN'</simple>
+                    <to uri="seda:activateVPN"/>
+                </when>
+            </choice>
+            <!-- Log output response -->
+            <to uri="log:org.apache.camel.example?level=DEBUG"/>
+        </route>
+
+        <!-- WS SOAPAction: 'updateStatus' -->
+        <route>
+            <from uri="seda:activateCPE"/>
+            <!-- Unmarshal response to 'ActivateCPEResponse' -->
+            <unmarshal ref="jaxb"/>
+            <transform>
+                <simple>${body.result}</simple>
+            </transform>
+        </route>
+
+        <!-- WS SOAPAction: 'getAllCustomerSite' -->
+        <route>
+            <from uri="seda:activateVPN"/>
+            <!-- Unmarshal response to 'ActivateVPNResult' -->
+            <unmarshal ref="jaxb"/>
+            <transform>
+                <simple>${body.result}</simple>
+            </transform>
+        </route>
+
+    </camelContext>
+</beans>

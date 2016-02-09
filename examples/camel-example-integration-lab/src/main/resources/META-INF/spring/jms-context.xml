@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <bean id="jmsJndiTemplate" class="org.springframework.jndi.JndiTemplate">
+        <property name="environment">
+            <props>
+                <!-- Initial context factory is set by using fasdfjndi.properties file set in classpath -->
+                <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+                <prop key="java.naming.provider.url">t3://localhost:7001</prop>
+                <prop key="java.naming.security.principal">system</prop>
+                <prop key="java.naming.security.credentials">weblogic12</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="jndiDestinationResolver"
+          class="org.springframework.jms.support.destination.JndiDestinationResolver">
+        <property name="jndiTemplate" ref="jmsJndiTemplate"/>
+    </bean>
+
+    <bean id="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate" ref="jmsJndiTemplate"/>
+        <property name="jndiName" value="xng/jms/ConnectionFactory"/>
+    </bean>
+
+    <bean id="jmsConfiguration" class="org.apache.camel.component.jms.JmsConfiguration">
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
+        <property name="destinationResolver" ref="jndiDestinationResolver"/>
+    </bean>
+
+    <bean id="wls" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="configuration" ref="jmsConfiguration"/>
+    </bean>
+
+    <!-- this CamelContext contains the equivalent route from the Java DSL, but in XML
+       so end users can see how to implement the route in both Java and XML -->
+    <camelContext id="jms-server" xmlns="http://camel.apache.org/schema/spring">
+        <!-- JMS :: Granite IP VPN Service -->
+        <route>
+            <from uri="wls:queue:xng/jms/IncomingMessageQueue"/>
+            <log message="Received Granite::JMS request for 'createIPVPNService'"/>
+            <!-- Log input request -->
+            <to uri="log:org.apache.camel.example?level=DEBUG"/>
+            <!-- Resolve next test step-->
+            <setHeader headerName="TestStep">
+                <method bean="testCaseManager" method="getNextTestStep"/>
+            </setHeader>
+            <!-- TODO: Validate request -->
+            <!-- Consume file response -->
+            <transform>
+                <simple>${headers.TestStep.response}</simple>
+            </transform>
+            <convertBodyTo type="java.io.InputStream"/>
+            <!-- Log output response -->
+            <to uri="log:org.apache.camel.example?level=DEBUG"/>
+            <!-- Send response to response queue -->
+            <to uri="wls:queue:xng/jms/OutgoingMessageQueue?jmsMessageType=Text"/>
+        </route>
+    </camelContext>
+</beans>

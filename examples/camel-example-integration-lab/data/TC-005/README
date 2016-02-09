@@ -1,0 +1,29 @@
+Test status update WS SOAP operation
+
+Activate VPN
+
+From: EOC
+To:   Granite
+
+Sent params(Request):
+    - VPN Id
+    - Managed Access
+    - VRF Name prefix
+    - Topology
+    - list of
+        - CE Port Id
+        - PE Port Id
+        - End Point Role
+        - CosH_CIR
+        - CosM_CIR
+        - Cost_CIR
+
+Received params(Response):
+     - result
+
+Comments:
+
+Transport layer: SOAP overt HTTP
+
+Testing with SOAP-UI:
+Send request 000-REQ.xml to http://localhost:9080/services/ema and receive Ack. 000-RSP.xml.

@@ -1,0 +1,3 @@
+<updateStatusResponse xmlns="http://ipvpn.ossuc.com">
+    <updateStatusReturn>Success</updateStatusReturn>
+</updateStatusResponse>
